@@ -3,7 +3,7 @@ let db = require('../db');
 
 const Livro = db.define('Livro',
     {
-        ISBN: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
@@ -13,14 +13,12 @@ const Livro = db.define('Livro',
             type: DataTypes.STRING,
             allowNull: false
         },
-        editora: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ano: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        }
+        editora: DataTypes.STRING,
+        tradutor: DataTypes.STRING,
+        ISBN: DataTypes.STRING,
+        ano: DataTypes.INTEGER,
+        paginas:  DataTypes.INTEGER,
+        snopse: DataTypes.STRING(500)
     }
 );
 module.exports = Livro; 

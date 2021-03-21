@@ -1,9 +1,10 @@
+require('dotenv').config();
 const {Pool} = require('pg');
 const sql = require('fs').readFileSync('./etc/script-create-table.sql', 'utf8');
 
 async function criarConexao(){
     const poll = new Pool({
-        connectionString: '',
+        connectionString: process.env.DATABASE_URL,
         ssl: {
             rejectUnauthorized: false
         }

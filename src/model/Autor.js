@@ -13,10 +13,7 @@ const Autor = db.define('Autor',
             type: DataTypes.STRING,
             allowNull: false
         },
-        nascimento: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
+        nascimento: DataTypes.DATE,
         mini_bio: DataTypes.STRING
     }
 );

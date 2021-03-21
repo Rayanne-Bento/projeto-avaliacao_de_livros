@@ -8,6 +8,10 @@ const Categoria = db.define('Categoria',
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
+        },
+        nome: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     }
 );
