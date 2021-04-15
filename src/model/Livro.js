@@ -18,7 +18,15 @@ const Livro = db.define('Livro',
         ISBN: DataTypes.STRING,
         ano: DataTypes.INTEGER,
         paginas:  DataTypes.INTEGER,
-        snopse: DataTypes.STRING(500)
-    }
+        sinopse: DataTypes.STRING(500),
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
+    },
 );
 module.exports = Livro; 

@@ -19,6 +19,14 @@ const pertence = db.define('pertence',
             references: {
                 model: Categoria,
                 key: 'id'
+            },
+            createdAt: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                allowNull: false
             }
         },
     }

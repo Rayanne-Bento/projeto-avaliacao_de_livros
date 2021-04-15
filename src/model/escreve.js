@@ -20,6 +20,14 @@ const escreve = db.define('escreve',
                 model: Livro,
                 key: 'id'
             }
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false
         }
     }
 );

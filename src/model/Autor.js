@@ -14,7 +14,15 @@ const Autor = db.define('Autor',
             allowNull: false
         },
         nascimento: DataTypes.DATE,
-        mini_bio: DataTypes.STRING
+        mini_bio: DataTypes.STRING,
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
     }
 );
 module.exports = Autor;
