@@ -13,82 +13,90 @@ async function sincronizar(){
 }
 //sincronizar();
 
-async function inserir(table, nome){
-    await table.create({nome: nome});
+var DAO = {
+    //CREATE
+    inserir: {
+        autor_categoria: async function(table, nome){
+            await table.create({nome: nome});
+        },
+        usuario: async function(email, nome, user_name, nascimento){
+            await Usuario.create({email: email, nome: nome, user_name: user_name, nascimento: nascimento});
+        },
+        livro: async function(titulo){
+            await Livro.create({titulo: titulo});
+        },
+        avaliacao: async function(nota, id_livro, id_usuario){
+            await Avaliacao.create({nota: nota, id_livro: id_livro, id_usuario: id_usuario});
+        },
+        escreve: async function(id_autor, id_livro){
+            await escreve.create({id_autor: id_autor, id_livro: id_livro});
+        },
+        pertence: async function(id_livro, id_categoria){
+            await escreve.create({id_livro: id_livro, id_categoria: id_categoria});
+        }
+    },
+    //READ
+    consultar: async function(table){
+        let tabelas = await table.findAll();
+        console.log(tabelas);
+    },
+    //UPDATE
+    atualizar: {
+        usuario_autor_categoria: async function(table, nome, id){
+            let tupla = await table.findOne({
+                where: {id: id}
+            });
+            tupla.update({nome: nome});
+        },
+        livro: async function(titulo, id){
+            let livro = await Livro.findOne({
+                where: {id: id}
+            });
+            livro.update({titulo: titulo});
+        },
+        avaliacao: async function(nota, id){
+            let avaliacao = await Avaliacao.findOne({
+                where: {id: id}
+            });
+            avaliacao.update({nota: nota});
+        }
+    },
+    //DELETE
+    deletar: async function(table, id){
+        let tupla = await table.findOne({
+            where: {id: id}
+        });
+        tupla.destroy();
+    }
 }
-//inserir(Autor, 'Sorvetinho');
-//inserir(Categoria, 'Moranguinho');
 
-async function inserir_usuario(){
-    await Usuario.create({email: 'fulano@gmail.com', nome: 'Fulano', user_name: 'fulano.pudim', nascimento: 2021-04-14});
+try{
+    DAO.inserir.autor_categoria(table, nome);
+    /*DAO.inserir.usuario(nome);
+    DAO.inserir.livro(titulo, id);
+    DAO.inserir.avaliacao(nota)
+    DAO.inserir.escreve(id);
+    DAO.inserir.pertence(id);*/
+}catch(error){
+    throw new Error('Objeto não criado!')
 }
-//inserir_usuario();
 
-async function inserir_livro(){
-    await Livro.create({titulo: 'Como eu era antes de você'});
+try{
+    DAO.consultar(Auto);
+}catch(error){
+    throw new Error('Objeto não encontrado!')
 }
-//inserir_livro();
 
-async function inserir_avaliacao(){
-    await Avaliacao.create({nota: 100, id_livro: 50, id_usuario: 50});
+try{
+    DAO.atualizar.usuario_autor_categoria(table, nome, id);
+    /*DAO.atualizar.livro(titulo, id);
+    DAO.atualizar.avaliacao(nota, id);*/
+}catch(error){
+    throw new Error('Objeto não atualizado!')
 }
-//inserir_avaliacao();
-async function inserir_escreve(){
-    await escreve.create({id_autor: 10, id_livro: 10});
-}
-//inserir_escreve();
 
-async function inserir_pertence(){
-    await escreve.create({id_livro: 10, id_categoria: 108});
+try{
+    DAO.deletar(Autor, id);
+}catch(error){
+    throw new Error('Objeto não deletado!')
 }
-//inserir_escreve();
-
-async function consultar(table){
-    let tabelas = await table.findAll();
-    console.log(tabelas);
-}
-/*consultar(Autor);
-consultar(Avaliacao);
-consultar(Categoria);
-consultar(escreve);
-consultar(Livro);
-consultar(pertence);
-consultar(Usuario);*/
-
-async function atualizar(table, nome){
-    let tupla = await table.findOne({
-        where: {id: 60}
-    });
-    tupla.update({nome: nome});
-}
-//atualizar(Usuario, 'Cicrano');
-//atualizar(Autor, 'Jojo Moyes');
-//atualizar(Categoria, 'Pão na Chapa');
-async function atualizar_livro(){
-    let livro = await Livro.findOne({
-        where: {id: 60}
-    });
-    livro.update({titulo: 'Todo Dia'});
-}
-//atualizar_livro();
-async function atualizar_avaliacao(){
-    let avaliacao = await Avaliacao.findOne({
-        where: {id: 60}
-    });
-    avaliacao.update({nota: 100});
-}
-//atualizar_avaliacao();
-
-async function deletar(table){
-   let tupla = await table.findOne({
-       where: {id: 60}
-   });
-   tupla.destroy();
-}
-//deletar(Autor);
-//deletar(Avaliacao);
-//deletar(Categoria);
-//deletar(escreve);
-//deletar(Livro);
-//deletar(pertence);
-//deletar(Usuario);
